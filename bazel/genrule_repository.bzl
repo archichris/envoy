@@ -107,9 +107,12 @@ def _genrule_environment(ctx):
     # https://stackoverflow.com/questions/37603238/fsanitize-not-using-gold-linker-in-gcc-6-1
     force_ld = []
     if "clang" in c_compiler:
-        force_ld = ["-fuse-ld=lld"]
+         force_ld = ["-fuse-ld=lld"]
     elif "gcc" in c_compiler or "g++" in c_compiler:
         force_ld = ["-fuse-ld=gold"]
+
+   # if "gcc" in c_compiler or "g++" in c_compiler:
+   #     force_ld = ["-fuse-ld=gold"]
 
     cc_flags = []
     ld_flags = []

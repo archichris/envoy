@@ -15,6 +15,14 @@ esac
 ROOT=$$(dirname $(rootpath wee8/BUILD.gn))/..
 pushd $$ROOT/wee8
 
+echo "[DBG] ROOT is $$ROOT"
+echo "[DBG] $$(ll wee8) / $$(cat wee8/build/config/compiler/BUILD.gn|grep fatal_linker_warnings)"
+
+sed -i 's/fatal_linker_warnings = true/fatal_linker_warnings = false/g' wee8/build/config/compiler/BUILD.gn
+
+echo "[DBG] $$(ll wee8) / $$(cat wee8/build/config/compiler/BUILD.gn|grep fatal_linker_warnings)"
+
+
 # Clean after previous build.
 rm -rf out/wee8
 
