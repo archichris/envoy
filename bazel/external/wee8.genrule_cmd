@@ -15,13 +15,12 @@ esac
 ROOT=$$(dirname $(rootpath wee8/BUILD.gn))/..
 pushd $$ROOT/wee8
 
-echo "[DBG] ROOT is $$ROOT"
-echo "[DBG] $$(ll wee8) / $$(cat wee8/build/config/compiler/BUILD.gn|grep fatal_linker_warnings)"
+# echo "[DBG] Current is $$(pwd)" 
+# echo "[DBG] $$(cat build/config/compiler/BUILD.gn|grep fatal_linker_warnings)"
 
-sed -i 's/fatal_linker_warnings = true/fatal_linker_warnings = false/g' wee8/build/config/compiler/BUILD.gn
+# sed -i 's/fatal_linker_warnings = true/fatal_linker_warnings = false/g' build/config/compiler/BUILD.gn
 
-echo "[DBG] $$(ll wee8) / $$(cat wee8/build/config/compiler/BUILD.gn|grep fatal_linker_warnings)"
-
+# echo "[DBG] $$(cat build/config/compiler/BUILD.gn|grep fatal_linker_warnings)"
 
 # Clean after previous build.
 rm -rf out/wee8
@@ -85,6 +84,9 @@ WEE8_BUILD_ARGS+=" v8_enable_shared_ro_heap=false"
 if [[ `uname -m` == "aarch64" ]]; then
   WEE8_BUILD_ARGS+=" target_cpu=\"arm64\""
 fi
+
+# WEE8_BUILD_ARGS+=" using_sanitizer=true"
+WEE8_BUILD_ARGS+=" fatal_linker_warnings=false"
 
 # Build wee8.
 if [[ "$$(uname -s)" == "Darwin" ]]; then
